@@ -27,13 +27,16 @@ public class ConfigurationSingletonTest {
         Assertions.assertThat(memberRepository).isSameAs(memberRepository2);
 
     }
+
     @Test
-    void configurationDeep(){
+    void configurationDeep() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
         AppConfig bean = ac.getBean(AppConfig.class);
         System.out.println("bean.getClass() = " + bean.getClass());
-        Control control=new Control();
+        Control control = new Control();
         System.out.println("control = " + control.getClass());
     }
-    class Control{}
+
+    static class Control {
+    }
 }

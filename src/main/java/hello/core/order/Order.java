@@ -19,12 +19,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "memberId=" + memberId +
-                ", itemName='" + itemName + '\'' +
-                ", itemprice=" + itemprice +
-                ", discountPrice=" + discountPrice +
-                '}';
+        return "Order{" + "memberId=" + memberId + ", itemName='" + itemName + '\'' + ", itemprice=" + itemprice + ", discountPrice=" + discountPrice + '}';
     }
 
     public Long getMemberId() {
