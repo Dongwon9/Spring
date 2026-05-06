@@ -28,6 +28,7 @@ public class AllBeanTest {
         private final Map<String, DiscountPolicy> policyMap;
         private final List<DiscountPolicy> policies;
         
+        //이렇게 하면, spring은 DiscountPolicy 타입에 해당하는 빈을 모두 찾아 주입한다.
         public DiscountService(Map<String, DiscountPolicy> policyMap, List<DiscountPolicy> policies) {
             this.policyMap = policyMap;
             this.policies = policies;
