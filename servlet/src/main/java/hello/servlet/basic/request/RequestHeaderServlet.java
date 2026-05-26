@@ -26,15 +26,15 @@ public class RequestHeaderServlet extends HttpServlet {
         System.out.println("--- REQUEST-LINE - end ---");
         System.out.println();
     }
-
+    
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         printStartLine(request);
         printHeaders(request);
-        printHeaderutils(request);
+        printHeaderUtils(request);
         printEtc(request);
     }
-
+    
     private void printHeaders(HttpServletRequest request) {
         System.out.println("--- REQUEST-HEADERS - start ---");
 //        Enumeration<String> headerNames = request.getHeaderNames();
@@ -42,12 +42,13 @@ public class RequestHeaderServlet extends HttpServlet {
 //            String headerName = headerNames.nextElement();
 //            System.out.println(headerName + ": " + headerName);
 //        }
-        request.getHeaderNames().asIterator().forEachRemaining(headerName -> System.out.println(headerName + ": " + request.getHeader(headerName)));
+        request.getHeaderNames().asIterator().forEachRemaining(
+                headerName -> System.out.println(headerName + ": " + request.getHeader(headerName)));
         System.out.println("--- REQUEST-HEADERS - end ---");
         System.out.println();
     }
-
-    private void printHeaderutils(HttpServletRequest request) {
+    
+    private void printHeaderUtils(HttpServletRequest request) {
         System.out.println("--- Header 편의 조회 start ---");
         System.out.println("[Host 편의 조회]");
         System.out.println("request.getServerName() = " + request.getServerName());
@@ -71,7 +72,7 @@ public class RequestHeaderServlet extends HttpServlet {
         System.out.println("--- Header 편의 조회 end");
         System.out.println();
     }
-
+    
     private void printEtc(HttpServletRequest request) {
         System.out.println("--- 기타 조회 start ---");
         System.out.println("[Remote 정보]");
