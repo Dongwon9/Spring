@@ -1,6 +1,5 @@
 package hello.servlet.web.frontcontroller.v2;
 
-import hello.servlet.web.frontcontroller.MyView;
 import hello.servlet.web.frontcontroller.v2.controller.MemberFormControllerV2;
 import hello.servlet.web.frontcontroller.v2.controller.MemberListControllerV2;
 import hello.servlet.web.frontcontroller.v2.controller.MemberSaveControllerV2;
@@ -27,16 +26,11 @@ public class FrontControllerServletV2 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String requestUri = req.getRequestURI();
-        
         ControllerV2 controller = controllerMap.get(requestUri);
         if (controller == null) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        controller.process(req, resp);
-        
-        MyView view = controller.process(req, resp);
-        view.render(req, resp);
+        controller.process(req, resp).render(req, resp);
     }
-    
 }
