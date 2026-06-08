@@ -1,6 +1,5 @@
 package hello.servlet.web.frontcontroller.v2;
 
-import hello.servlet.web.frontcontroller.MyView;
 import hello.servlet.web.frontcontroller.v2.controller.MemberFormControllerV2;
 import hello.servlet.web.frontcontroller.v2.controller.MemberListControllerV2;
 import hello.servlet.web.frontcontroller.v2.controller.MemberSaveControllerV2;
@@ -33,10 +32,9 @@ public class FrontControllerServletV2 extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        controller.process(req, resp);
+        controller.process(req, resp).render(req, resp);
         
-        MyView view = controller.process(req, resp);
-        view.render(req, resp);
+        
     }
     
 }
