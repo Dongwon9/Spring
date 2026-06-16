@@ -40,14 +40,16 @@ public class FrontControllerServletV3 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String requestUri = req.getRequestURI();
+        //1.컨트롤러 조회
         ControllerV3 controller = controllerMap.get(requestUri);
         if (controller == null) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        //paramMap
+        //2.컨트롤러 호출,ModelView 반환받음
         Map<String, String> paramMap = createParamMap(req);
         ModelView mv = controller.process(paramMap);
+        //3.viewResolver 호출, myView 반환받음
         String viewName = mv.getViewName();
         MyView view = viewResolver(viewName);
         view.render(mv.getModel(), req, resp);
