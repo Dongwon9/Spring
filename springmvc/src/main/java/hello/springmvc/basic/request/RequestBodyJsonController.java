@@ -35,7 +35,7 @@ public class RequestBodyJsonController {
 
     @ResponseBody
     @PostMapping("/request-body-json-v2")
-    public String requestBodyJsonV2(@RequestBody String messageBody) throws IOException {
+    public String requestBodyJsonV2(@RequestBody String messageBody) {
 
         log.info("messageBody:{}", messageBody);
         HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);
@@ -45,23 +45,22 @@ public class RequestBodyJsonController {
 
     @ResponseBody
     @PostMapping("/request-body-json-v3")
-    public String requestBodyJsonV3(@RequestBody HelloData helloData) throws IOException {
+    public String requestBodyJsonV3(@RequestBody HelloData helloData) {
         log.info("username={},age={}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
 
     @ResponseBody
     @PostMapping("/request-body-json-v4")
-    public String requestBodyJsonV4(HttpEntity<HelloData> httpEntity) throws IOException {
+    public String requestBodyJsonV4(HttpEntity<HelloData> httpEntity) {
         HelloData helloData = httpEntity.getBody();
         log.info("username={},age={}", helloData.getUsername(), helloData.getAge());
-
         return "ok";
     }
 
     @ResponseBody
     @PostMapping("/request-body-json-v5")
-    public HelloData requestBodyJsonV5(@RequestBody HelloData helloData) throws IOException {
+    public HelloData requestBodyJsonV5(@RequestBody HelloData helloData) {
         log.info("username={},age={}", helloData.getUsername(), helloData.getAge());
         return helloData;
     }
