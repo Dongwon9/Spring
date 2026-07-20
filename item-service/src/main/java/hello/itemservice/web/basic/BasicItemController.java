@@ -6,9 +6,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,16 +24,28 @@ public class BasicItemController {
     }
 
     @GetMapping("/{itemId}")
-    public String item(@PathVariable long itemId,Model model) {
+    public String item(@PathVariable long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
-        model.addAttribute("item",item);
+        model.addAttribute("item", item);
         return "basic/item";
-
     }
 
     @GetMapping("/add")
-    public String addForm(){
+    public String addForm() {
         return "basic/addForm";
+    }
+
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable Long itemId, Model model) {
+        Item item = itemRepository.findById(itemId);
+        model.addAttribute("item", item);
+        return "basic/editForm";
+    }
+
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+        itemRepository.update(itemId, item);
+        return "redirect:/basic/items/{itemId}";
     }
 
     @PostConstruct
