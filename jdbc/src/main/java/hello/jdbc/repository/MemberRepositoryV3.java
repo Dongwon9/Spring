@@ -69,13 +69,11 @@ public class MemberRepositoryV3 {
             log.error("db error", e);
             throw e;
         } finally {
-            JdbcUtils.closeResultSet(rs);
-            JdbcUtils.closeStatement(pstmt);
-            JdbcUtils.closeConnection(con);
+            close(con, pstmt, rs);
         }
     }
 
-    public void update(String memberId, int money) {
+    public void update(String memberId, int money) throws SQLException {
         String sql = "update member set money = ? where member_id = ?";
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -88,10 +86,12 @@ public class MemberRepositoryV3 {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             log.error("db error", e);
+        } finally {
+            close(con, pstmt, null);
         }
     }
 
-    public void delete(String memberId) {
+    public void delete(String memberId) throws SQLException {
         String sql = "delete from member where member_id = ?";
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -102,6 +102,8 @@ public class MemberRepositoryV3 {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close(con, pstmt, null);
         }
     }
 

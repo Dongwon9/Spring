@@ -34,7 +34,7 @@ class MemberServiceV3_1Test {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USER, PASSWORD);
         memberRepository = new MemberRepositoryV3(dataSource);
         PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
-        memberService = new MemberServiceV3_1(dataSource, memberRepository);
+        memberService = new MemberServiceV3_1(transactionManager, memberRepository);
     }
 
     @Test
@@ -81,7 +81,7 @@ class MemberServiceV3_1Test {
     }
 
     @AfterEach
-    void after() {
+    void after() throws SQLException {
         memberRepository.delete(MEMBER_A);
         memberRepository.delete(MEMBER_B);
         memberRepository.delete(MEMBER_EX);
