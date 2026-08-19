@@ -13,6 +13,9 @@ public class MemberServiceV3_2 {
     private final TransactionTemplate txTemplate;
     private final MemberRepositoryV3 memberRepository;
 
+    /**
+     * @param transactionManager TransactionTemplate 생성자에 넣기 위해 여전히 주입받음
+     */
     public MemberServiceV3_2(PlatformTransactionManager transactionManager, MemberRepositoryV3 memberRepository) {
         this.txTemplate = new TransactionTemplate(transactionManager);
         this.memberRepository = memberRepository;
