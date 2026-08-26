@@ -77,7 +77,7 @@ public class MemberRepositoryV4_2 implements MemberRepository {
 
     @Override
     public void update(String memberId, int money) {
-        String sql = "update member set money = ? where member_id = ?";
+        final String sql = "update member set money = ? where member_id = ?";
         Connection con = null;
         PreparedStatement pstmt = null;
 
