@@ -48,6 +48,13 @@ public class BasicController {
         return "basic/variable";
     }
 
+    @GetMapping("link")
+    public String link(Model model) {
+        model.addAttribute("param1", "data1");
+        model.addAttribute("param2", "data2");
+        return "basic/link";
+    }
+
     @GetMapping("/basic-objects")
     public String basicObjects(Model model, HttpServletRequest request, HttpServletResponse response,
             HttpSession session) {
@@ -56,6 +63,24 @@ public class BasicController {
         model.addAttribute("response", response);
         model.addAttribute("servletContext", request.getServletContext());
         return "basic/basic-objects";
+    }
+
+    @GetMapping("/literal")
+    public String literal(Model model) {
+        model.addAttribute("data", "Spring!");
+        return "basic/literal";
+    }
+
+    @GetMapping("/operation")
+    public String operation(Model model) {
+        model.addAttribute("nullData", null);
+        model.addAttribute("data", "Spring!");
+        return "basic/operation";
+    }
+
+    @GetMapping("/attribute")
+    public String attribute() {
+        return "basic/attribute";
     }
 
     @GetMapping("/date")
